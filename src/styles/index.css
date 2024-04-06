@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.homepageGradient {
+  background: linear-gradient(to right, #c19175, #d4b8bd, #92aabe, #6b9eb3, #C9E3FF, #B2F7EF, #FFD8BE, #FFC3A0);
+  background-size: 1200% 1200%;
+  animation: gradientAnimation 30s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%; /* Początkowa pozycja tła */
+  }
+  25% {
+    background-position: 100% 50%; /* Przesunięcie w prawo */
+  }
+  50% {
+    background-position: 100% 100%; /* Przesunięcie w dół */
+  }
+  75% {
+    background-position: 0% 100%; /* Przesunięcie w górę */
+  }
+  100% {
+    background-position: 0% 50%; /* Powrót do początkowej pozycji */
+  }
+}
