@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Box, Step, StepLabel, Stepper } from "@mui/material";
 import StepOne from "./StepOne";
+import StepTwo from "./StepTwo";
 
 const Generator = () => {
   const steps = ["Krok 1", "Krok 2", "Krok 3"];
   const [step, setStep] = useState(0);
+  const [file, setFile] = useState(null);
 
   return (
     <Box>
@@ -22,7 +24,12 @@ const Generator = () => {
         ))}
       </Stepper>
 
-      {step === 0 && <StepOne />}
+      {step === 0 && (
+        <StepOne setStep={setStep} file={file} setFile={setFile} />
+      )}
+      {step === 1 && (
+        <StepTwo setStep={setStep} file={file} setFile={setFile} />
+      )}
     </Box>
   );
 };

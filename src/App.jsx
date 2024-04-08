@@ -9,13 +9,21 @@ import RegisterForm from "./Security/RegisterForm";
 import Profile from "./User/Profile";
 import Generator from "./Generator/Generator";
 
+const fullPageStyle = {
+  height: "100vh",
+  maxHeight: "100vh",
+  backgroundColor: "#f5f5dc",
+};
+
 const App = () => {
   const { pathname } = useLocation();
+  const isFullPage = pathname === "/generate";
+  const viewMenu = pathname !== "/generate";
 
   return (
     <>
-      {pathname !== "/generate" && <Menu />}
-      <Box>
+      {viewMenu && <Menu />}
+      <Box sx={isFullPage ? fullPageStyle : {}}>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<LoginForm />} />
