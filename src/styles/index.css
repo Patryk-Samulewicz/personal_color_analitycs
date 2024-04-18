@@ -20,7 +20,7 @@ code {
 
 @keyframes gradientAnimation {
   0% {
-    background-position: 0% 50%; /* Początkowa pozycja tła */
+    background-position: 0 50%; /* Początkowa pozycja tła */
   }
   25% {
     background-position: 100% 50%; /* Przesunięcie w prawo */
@@ -29,9 +29,22 @@ code {
     background-position: 100% 100%; /* Przesunięcie w dół */
   }
   75% {
-    background-position: 0% 100%; /* Przesunięcie w górę */
+    background-position: 0 100%; /* Przesunięcie w górę */
   }
   100% {
-    background-position: 0% 50%; /* Powrót do początkowej pozycji */
+    background-position: 0 50%; /* Powrót do początkowej pozycji */
   }
+}
+
+.homepageHeader {
+  color: #fff;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+.v-center {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

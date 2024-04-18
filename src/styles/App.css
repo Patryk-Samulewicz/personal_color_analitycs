@@ -23,3 +23,42 @@
 .color-pickers:hover {
     box-shadow: 0 3px 11px 2px rgb(25, 118, 210);
 }
+
+.menu-logo {
+    width: 3rem;
+    height: 3rem;
+    margin-right: 1rem;
+}
+
+.menu-brand-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    vertical-align: middle;
+    word-spacing: 1rem;
+}
+
+.menu-brand-name-text {
+    letter-spacing: 0.3rem !important;
+    font-size: 1.2rem !important;
+    font-weight: bold !important;
+    background: #1691a9; /* Gradient tła */
+    -webkit-background-clip: text; /* Klip tła do tekstu */
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    line-height: 0.9 !important;
+}
+
+.menu-logo-brand {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 20%;
+    text-decoration: none;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}

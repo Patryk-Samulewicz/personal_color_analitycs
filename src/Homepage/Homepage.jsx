@@ -3,47 +3,34 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import UploadIcon from "@mui/icons-material/Upload";
 import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { Animated } from "../utilities/Animated";
 
 const Homepage = () => {
   return (
-    <>
+    <Animated>
       <Box
         className="homepageGradient"
         sx={{
-          height: "65vh",
+          minHeight: "65vh",
         }}
       >
         <Container>
-          <Grid container justifyContent="center" sx={{ paddingTop: "10rem" }}>
-            <Grid item md={6}></Grid>
-            <Grid item md={6}>
-              <Typography
-                variant="h1"
-                gutterBottom
-                sx={{
-                  color: "white",
-                  textShadow: "2px 2px 4px #000000",
-                }}
-              >
+          <Grid
+            container
+            justifyContent="center"
+            alignItems="center"
+            flexDirection={{ xs: "column", md: "row" }}
+            sx={{ paddingTop: "10rem" }}
+          >
+            <Grid item md={6} xs={0}></Grid>
+            <Grid item md={6} xs={12}>
+              <Typography variant="h1" gutterBottom className="homepageHeader">
                 Twoja analiza kolorystyczna
               </Typography>
-              <Typography
-                variant="h4"
-                paragraph
-                sx={{
-                  color: "white",
-                  textShadow: "2px 2px 4px #000000",
-                }}
-              >
+              <Typography variant="h4" gutterBottom className="homepageHeader">
                 Zdobądź swój kolor za darmo!
               </Typography>
-              <Typography
-                paragraph
-                sx={{
-                  color: "white",
-                  textShadow: "2px 2px 4px #000000",
-                }}
-              >
+              <Typography gutterBottom className="homepageHeader">
                 Celem analizy kolorystycznej jest określenie, które kolory
                 najlepiej pasują do Ciebie i Twojej urody. Dzięki temu dowiesz
                 się, jakie kolory ubrań, makijażu i dodatków będą dla Ciebie
@@ -55,63 +42,55 @@ const Homepage = () => {
       </Box>
       <Box>
         <Container sx={{ paddingTop: "5rem", paddingBottom: "5rem" }}>
-          <Grid container justifyContent="center" sx={{ textAlign: "center" }}>
-            <Grid item md={4}>
+          <Grid
+            container
+            justifyContent="space-between"
+            sx={{ textAlign: "center" }}
+          >
+            <Grid item md={4} xs={4}>
               <Typography variant="h4" gutterBottom>
                 Krok 1
               </Typography>
             </Grid>
-            <Grid item md={4}>
+            <Grid item md={4} xs={4}>
               <Typography variant="h4" gutterBottom>
                 Krok 2
               </Typography>
             </Grid>
-            <Grid item md={4}>
+            <Grid item md={4} xs={4}>
               <Typography variant="h4" gutterBottom>
                 Krok 3
               </Typography>
             </Grid>
           </Grid>
-          <Grid container justifyContent="center" sx={{ textAlign: "center" }}>
-            <Grid
-              item
-              md={4}
-              display="flex"
-              flexDirection="column"
-              justifyContent="center"
-            >
-              <Typography variant="body1" paragraph>
+          <Grid
+            container
+            justifyContent="space-between"
+            sx={{ textAlign: "center" }}
+          >
+            <Grid item md={4} xs={4}>
+              <Typography variant="body1" paragraph className="v-center">
                 Wyślij zdjęcie
               </Typography>
             </Grid>
-            <Grid
-              item
-              md={4}
-              display="flex"
-              flexDirection="column"
-              justifyContent="center"
-            >
-              <Typography variant="body1" paragraph>
-                Zaznacz na nim kluczowe elementy:
-                <br />
-                <b>Skórę, Włosy i Oczy</b>
+            <Grid item md={4} xs={4}>
+              <Typography variant="body1" paragraph className="v-center">
+                Zaznacz na nim kluczowe elementy: <b>Skórę, Włosy i Oczy</b>
               </Typography>
             </Grid>
-            <Grid
-              item
-              md={4}
-              display="flex"
-              flexDirection="column"
-              justifyContent="center"
-            >
-              <Typography variant="body1" paragraph>
+            <Grid item md={4} xs={4}>
+              <Typography variant="body1" paragraph className="v-center">
                 Gotowe! <br /> Spersonalizowane AI dobierze specjalnie dla
                 Ciebie paletę kolorów
               </Typography>
             </Grid>
           </Grid>
-          <Grid container justifyContent="center" sx={{ textAlign: "center" }}>
-            <Grid item md={4}>
+          <Grid
+            container
+            justifyContent="space-between"
+            sx={{ textAlign: "center" }}
+          >
+            <Grid item md={4} xs={4}>
               <Typography variant="body1" paragraph>
                 <UploadIcon
                   sx={{
@@ -120,7 +99,7 @@ const Homepage = () => {
                 />
               </Typography>
             </Grid>
-            <Grid item md={4}>
+            <Grid item md={4} xs={4}>
               <Typography variant="body1" paragraph>
                 <FaceRetouchingNaturalIcon
                   sx={{
@@ -129,7 +108,7 @@ const Homepage = () => {
                 />
               </Typography>
             </Grid>
-            <Grid item md={4}>
+            <Grid item md={4} xs={4}>
               <Typography variant="body1" paragraph>
                 <CheckCircleIcon
                   sx={{
@@ -147,17 +126,8 @@ const Homepage = () => {
         }}
       >
         <Container>
-          <Grid
-            container
-            sx={{ paddingTop: "5rem", paddingBottom: "5rem", height: "60vh" }}
-          >
-            <Grid
-              item
-              md={6}
-              sx={{
-                padding: "2rem",
-              }}
-            >
+          <Grid container paddingY="5rem">
+            <Grid item md={6} xs={12}>
               <Typography variant="h2" gutterBottom>
                 Dlaczego warto?
               </Typography>
@@ -173,17 +143,27 @@ const Homepage = () => {
             <Grid
               item
               md={6}
+              xs={12}
               sx={{
-                backgroundImage: "url(assets/landing_foto.jpg)",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                height: "100%",
+                maxHeight: "40vh",
+                maxWidth: "100%",
               }}
-            ></Grid>
+            >
+              <Box
+                component="img"
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+                src="assets/landing_foto.jpg"
+                alt=""
+              />
+            </Grid>
           </Grid>
         </Container>
       </Box>
-    </>
+    </Animated>
   );
 };
 

@@ -1,144 +1,176 @@
-import * as React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Avatar,
   Box,
   Button,
   Checkbox,
+  CircularProgress,
   FormControlLabel,
   Grid,
   TextField,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { UserContext } from "../contexts/UserContext";
+import { Animated } from "../utilities/Animated";
+
+const host = process.env.REACT_APP_API_URL;
 
 const LoginForm = () => {
-  const [formData, setFormData] = React.useState({ email: "", password: "" });
+  const { user, setUser } = useContext(UserContext);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user.isLoggedIn) {
+      navigate("/");
+    }
+  }, []);
 
   const handleSubmit = async function (event) {
     event.preventDefault();
+    setError(null);
+    setIsLoading(true);
 
-    const data = new FormData(event.currentTarget);
+    const form = new FormData(event.target);
+    try {
+      const response = await axios.post(host + "/login", form);
 
-    const response = await fetch("http://localhost:81/login", {
-      method: "POST",
-      body: JSON.stringify({
-        email: formData.email,
-        password: formData.password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  };
+      if (response.data.status === "success") {
+        setUser({
+          isLoggedIn: true,
+          ...response.data.user,
+        });
 
-  const test = async function () {
-    let response = await fetch("http://localhost:81/test", {
-      method: "GET",
+        navigate("/");
+      }
+    } catch (error) {
+      setError("Nieprawidłowe dane logowania.");
+    }
 
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    console.log(response);
+    setIsLoading(false);
   };
 
   return (
-    <Grid container component="main" sx={{ height: "100vh" }}>
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        sx={{
-          backgroundImage: "url(https://source.unsplash.com/random?wallpapers)",
-          backgroundRepeat: "no-repeat",
-          backgroundColor: (t) =>
-            t.palette.mode === "light"
-              ? t.palette.grey[50]
-              : t.palette.grey[900],
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      <Grid
-        item
-        xs={12}
-        sm={8}
-        md={5}
-        elevation={6}
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
-        <Box
+    <Animated>
+      <Grid container component="main" sx={{ height: "100vh" }}>
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
           sx={{
-            my: 8,
-            mx: 4,
+            backgroundImage:
+              "url(https://source.unsplash.com/random?wallpapers)",
+            backgroundRepeat: "no-repeat",
+            backgroundColor: (t) =>
+              t.palette.mode === "light"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          elevation={6}
+          sx={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
-          <Typography component="h1" variant="h5">
-            Logowanie
-          </Typography>
           <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 1 }}
+            sx={{
+              my: 8,
+              mx: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Adres Email"
-              name="email"
-              autoComplete="email"
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Hasło"
-              type="password"
-              id="password"
-              onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
-              }
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Zapamiętaj mnie"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
+            <Typography component="h1" variant="h5">
+              Logowanie
+            </Typography>
+            <Typography color="error" marginTop="2rem">
+              {error}
+            </Typography>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 1 }}
             >
-              Zaloguj się
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Button onClick={test}>Zapomniałeś hasła?</Button>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Adres Email"
+                name="email"
+                autoComplete="email"
+                error={!!error}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="plainPassword"
+                label="Hasło"
+                type="password"
+                id="plainPassword"
+                error={!!error}
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox color="primary" name="_remember_me" value="true" />
+                }
+                label="Zapamiętaj mnie"
+              />
+              <Box sx={{ m: 1, position: "relative" }}>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  disabled={isLoading}
+                >
+                  Zaloguj się
+                </Button>
+                {isLoading && (
+                  <CircularProgress
+                    size={24}
+                    sx={{
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      marginTop: "-12px",
+                      marginLeft: "-12px",
+                    }}
+                  />
+                )}
+              </Box>
+              <Grid container>
+                <Grid item xs>
+                  <Button>Zapomniałeś hasła?</Button>
+                </Grid>
+                <Grid item>
+                  <Button component={Link} to="/register">
+                    Nie masz konta? Zarejestruj się.
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link to="/register">{"Nie masz konta? Zarejestruj się."}</Link>
-              </Grid>
-            </Grid>
+            </Box>
           </Box>
-        </Box>
+        </Grid>
       </Grid>
-    </Grid>
+    </Animated>
   );
 };
 
