@@ -5,7 +5,6 @@ import {
   Box,
   Button,
   Container,
-  Divider,
   Drawer,
   MenuItem,
   Toolbar,
@@ -14,6 +13,8 @@ import {
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { UserContext } from "../contexts/UserContext";
+import PaletteIcon from "@mui/icons-material/Palette";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 const Menu = () => {
   const [open, setOpen] = React.useState(false);
@@ -95,7 +96,7 @@ const Menu = () => {
                 to={"/profile"}
               >
                 <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
-                Witaj {user.name}
+                Profil
               </Button>
             ) : (
               <>
@@ -146,38 +147,63 @@ const Menu = () => {
                     flexGrow: 1,
                   }}
                 ></Box>
-                <MenuItem
-                  component={Link}
-                  to={"/generate"}
-                  sx={{ py: "6px", px: "12px" }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                    Generuj
-                  </Typography>
-                </MenuItem>
-                <Divider />
 
-                <MenuItem>
-                  <Button
-                    color="primary"
-                    variant="text"
-                    component={Link}
-                    to={"/login"}
-                  >
-                    Zaloguj się
-                  </Button>
-                </MenuItem>
-                <MenuItem>
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    size="small"
-                    component={Link}
-                    to={"/register"}
-                  >
-                    Zarejestruj się
-                  </Button>
-                </MenuItem>
+                {user.isLoggedIn ? (
+                  <>
+                    <MenuItem
+                      component={Link}
+                      to={"/profile"}
+                      sx={{
+                        py: "6px",
+                        px: "12px",
+                      }}
+                    >
+                      <AccountBoxIcon />
+                      <Typography
+                        variant="body2"
+                        color="text.primary"
+                        sx={{ pl: 2 }}
+                      >
+                        Profil
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem
+                      component={Link}
+                      to={"/generate"}
+                      sx={{ py: "6px", px: "12px" }}
+                    >
+                      <PaletteIcon />
+                      <Typography
+                        variant="body2"
+                        color="text.primary"
+                        sx={{ pl: 2 }}
+                      >
+                        Generuj
+                      </Typography>
+                    </MenuItem>
+                  </>
+                ) : (
+                  <>
+                    <MenuItem
+                      component={Link}
+                      to={"/login"}
+                      sx={{ py: "6px", px: "12px" }}
+                    >
+                      <Typography variant="body2" color="text.primary">
+                        Zaloguj się
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem
+                      component={Link}
+                      to={"/register"}
+                      sx={{ py: "6px", px: "12px" }}
+                    >
+                      <Typography variant="body2" color="text.primary">
+                        Zarejestruj się
+                      </Typography>
+                    </MenuItem>
+                  </>
+                )}
               </Box>
             </Drawer>
           </Box>

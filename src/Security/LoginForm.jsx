@@ -38,7 +38,7 @@ const LoginForm = () => {
     try {
       const response = await axios.post(host + "/login", form);
 
-      if (response.data.status === "success") {
+      if (response.data.token) {
         setUser({
           isLoggedIn: true,
           ...response.data.user,
@@ -59,11 +59,10 @@ const LoginForm = () => {
         <Grid
           item
           xs={false}
-          sm={4}
+          sm={false}
           md={7}
           sx={{
-            backgroundImage:
-              "url(https://source.unsplash.com/random?wallpapers)",
+            backgroundImage: "url(https://random.imagecdn.app/1920/1080)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -76,7 +75,7 @@ const LoginForm = () => {
         <Grid
           item
           xs={12}
-          sm={8}
+          sm={12}
           md={5}
           elevation={6}
           sx={{
@@ -87,11 +86,10 @@ const LoginForm = () => {
         >
           <Box
             sx={{
-              my: 8,
-              mx: 4,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              px: 3,
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>

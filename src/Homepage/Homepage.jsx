@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import UploadIcon from "@mui/icons-material/Upload";
 import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Animated } from "../utilities/Animated";
+import { Link } from "react-router-dom";
 
 const Homepage = () => {
   return (
@@ -24,7 +25,7 @@ const Homepage = () => {
           >
             <Grid item md={6} xs={0}></Grid>
             <Grid item md={6} xs={12}>
-              <Typography variant="h1" gutterBottom className="homepageHeader">
+              <Typography variant="h2" gutterBottom className="homepageHeader">
                 Twoja analiza kolorystyczna
               </Typography>
               <Typography variant="h4" gutterBottom className="homepageHeader">
@@ -41,7 +42,7 @@ const Homepage = () => {
         </Container>
       </Box>
       <Box>
-        <Container sx={{ paddingTop: "5rem", paddingBottom: "5rem" }}>
+        <Container sx={{ paddingTop: "5rem", paddingBottom: "2rem" }}>
           <Grid
             container
             justifyContent="space-between"
@@ -69,6 +70,39 @@ const Homepage = () => {
             sx={{ textAlign: "center" }}
           >
             <Grid item md={4} xs={4}>
+              <Typography variant="body1">
+                <UploadIcon
+                  sx={{
+                    fontSize: "4rem",
+                  }}
+                />
+              </Typography>
+            </Grid>
+            <Grid item md={4} xs={4}>
+              <Typography variant="body1">
+                <FaceRetouchingNaturalIcon
+                  sx={{
+                    fontSize: "4rem",
+                  }}
+                />
+              </Typography>
+            </Grid>
+            <Grid item md={4} xs={4}>
+              <Typography variant="body1">
+                <CheckCircleIcon
+                  sx={{
+                    fontSize: "4rem",
+                  }}
+                />
+              </Typography>
+            </Grid>
+          </Grid>
+          <Grid
+            container
+            justifyContent="space-between"
+            sx={{ textAlign: "center" }}
+          >
+            <Grid item md={4} xs={4}>
               <Typography variant="body1" paragraph className="v-center">
                 Wyślij zdjęcie
               </Typography>
@@ -85,37 +119,17 @@ const Homepage = () => {
               </Typography>
             </Grid>
           </Grid>
-          <Grid
-            container
-            justifyContent="space-between"
-            sx={{ textAlign: "center" }}
-          >
-            <Grid item md={4} xs={4}>
-              <Typography variant="body1" paragraph>
-                <UploadIcon
-                  sx={{
-                    fontSize: "4rem",
-                  }}
-                />
-              </Typography>
-            </Grid>
-            <Grid item md={4} xs={4}>
-              <Typography variant="body1" paragraph>
-                <FaceRetouchingNaturalIcon
-                  sx={{
-                    fontSize: "4rem",
-                  }}
-                />
-              </Typography>
-            </Grid>
-            <Grid item md={4} xs={4}>
-              <Typography variant="body1" paragraph>
-                <CheckCircleIcon
-                  sx={{
-                    fontSize: "4rem",
-                  }}
-                />
-              </Typography>
+          <Grid container justifyContent="center" sx={{ paddingTop: "2rem" }}>
+            <Grid item>
+              <Button
+                color="primary"
+                variant="contained"
+                size="large"
+                component={Link}
+                to={"/register"}
+              >
+                Zacznij już teraz
+              </Button>
             </Grid>
           </Grid>
         </Container>

@@ -16,6 +16,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AlertContext } from "../contexts/AlertContext";
+import { UserContext } from "../contexts/UserContext";
 import { Animated } from "../utilities/Animated";
 
 const host = process.env.REACT_APP_API_URL;
@@ -26,6 +27,13 @@ const RegisterForm = () => {
   const [serverError, setServerError] = React.useState(null);
   const navigate = useNavigate();
   const { setAlert } = React.useContext(AlertContext);
+  const { user } = React.useContext(UserContext);
+
+  React.useEffect(() => {
+    if (user.isLoggedIn) {
+      navigate("/");
+    }
+  }, []);
 
   async function handleSubmit(event) {
     event.preventDefault();

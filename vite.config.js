@@ -10,5 +10,8 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [react()],
     root: "src",
+    build: {
+      outDir: "../dist",
+    },
   };
 });

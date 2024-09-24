@@ -76,6 +76,7 @@ const StepTwo = ({ setStep, file, setFile }) => {
           justifyContent="space-between"
           alignItems="center"
           paddingTop="2rem"
+          paddingBottom="2rem"
         >
           <Grid item md={12} xs={12} alignItems="center">
             <Typography variant="h4" gutterBottom align="center">
@@ -95,15 +96,17 @@ const StepTwo = ({ setStep, file, setFile }) => {
               md: "0",
             }}
           >
-            <Stack spacing={2} direction={{ xs: "row", md: "column" }}>
+            <Stack
+              spacing={2}
+              direction={{ xs: "row", md: "column" }}
+              justifyContent="center"
+            >
               <Paper
                 elevation={12}
                 className="color-pickers"
                 onClick={startPicking("skin")}
               >
-                <Typography variant="h6" gutterBottom align="center">
-                  Kolor skóry
-                </Typography>
+                <Typography variant="subtitle2">Kolor skóry</Typography>
                 <Typography
                   sx={{
                     backgroundColor: colorsPicked.skin,
@@ -117,9 +120,7 @@ const StepTwo = ({ setStep, file, setFile }) => {
                 className="color-pickers"
                 onClick={startPicking("hair")}
               >
-                <Typography variant="h6" gutterBottom align="center">
-                  Kolor włosów
-                </Typography>
+                <Typography variant="subtitle2">Kolor włosów</Typography>
                 <Typography
                   sx={{
                     backgroundColor: colorsPicked.hair,
@@ -133,9 +134,7 @@ const StepTwo = ({ setStep, file, setFile }) => {
                 className="color-pickers"
                 onClick={startPicking("eye")}
               >
-                <Typography variant="h6" gutterBottom align="center">
-                  Kolor oczu
-                </Typography>
+                <Typography variant="subtitle2">Kolor oczu</Typography>
                 <Typography
                   sx={{
                     backgroundColor: colorsPicked.eye,
