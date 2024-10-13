@@ -6,7 +6,6 @@ import {
   Grid,
   Paper,
   Stack,
-  Tooltip,
   Typography,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -15,7 +14,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 // eslint-disable-next-line no-undef
 const eyeDropper = new EyeDropper();
 const pickTips = {
-  start: "Kliknij na lewo na kolor który chcesz wybrać.",
+  start: "Wybierz każdy z trzech kolorów.",
   skin: "Wybierz teraz kolor skóry.",
   hair: "Wybierz teraz kolor włosów.",
   eye: "Wybierz teraz kolor oczu.",
@@ -63,7 +62,11 @@ const StepTwo = ({ setStep, file, setFile }) => {
           [color]: colorPick.sRGBHex,
         }));
 
-        setCurrentTip(pickTips.end);
+        if (isCanGoNext()) {
+          setCurrentTip(pickTips.end);
+        } else {
+          setCurrentTip(pickTips.start);
+        }
       });
     };
   };
@@ -75,14 +78,20 @@ const StepTwo = ({ setStep, file, setFile }) => {
           container
           justifyContent="space-between"
           alignItems="center"
-          paddingTop="2rem"
-          paddingBottom="2rem"
+          paddingTop="1rem"
+          paddingBottom="1rem"
         >
           <Grid item md={12} xs={12} alignItems="center">
-            <Typography variant="h4" gutterBottom align="center">
+            <Typography variant="h5" gutterBottom align="center">
               Zaznacz kolory na zdjęciu.
             </Typography>
-            <Typography variant="body1" align="center">
+            <Typography
+              variant="body1"
+              align="center"
+              sx={{
+                fontSize: "0.9rem",
+              }}
+            >
               {currentTip}
             </Typography>
           </Grid>
@@ -106,7 +115,7 @@ const StepTwo = ({ setStep, file, setFile }) => {
                 className="color-pickers"
                 onClick={startPicking("skin")}
               >
-                <Typography variant="subtitle2">Kolor skóry</Typography>
+                <Typography variant="subtitle2">Kolor&nbsp;skóry</Typography>
                 <Typography
                   sx={{
                     backgroundColor: colorsPicked.skin,
@@ -120,7 +129,7 @@ const StepTwo = ({ setStep, file, setFile }) => {
                 className="color-pickers"
                 onClick={startPicking("hair")}
               >
-                <Typography variant="subtitle2">Kolor włosów</Typography>
+                <Typography variant="subtitle2">Kolor&nbsp;włosów</Typography>
                 <Typography
                   sx={{
                     backgroundColor: colorsPicked.hair,
@@ -134,7 +143,7 @@ const StepTwo = ({ setStep, file, setFile }) => {
                 className="color-pickers"
                 onClick={startPicking("eye")}
               >
-                <Typography variant="subtitle2">Kolor oczu</Typography>
+                <Typography variant="subtitle2">Kolor&nbsp;oczu</Typography>
                 <Typography
                   sx={{
                     backgroundColor: colorsPicked.eye,
@@ -172,12 +181,7 @@ const StepTwo = ({ setStep, file, setFile }) => {
               alt=""
             />
           </Grid>
-          <Grid
-            container
-            md={12}
-            justifyContent="space-evenly"
-            marginTop="1rem"
-          >
+          <Grid container md={12} justifyContent="space-evenly" gap={1}>
             <Button
               variant="outlined"
               startIcon={<ArrowBackIcon />}
@@ -185,22 +189,13 @@ const StepTwo = ({ setStep, file, setFile }) => {
             >
               Wybierz inne zdjęcie
             </Button>
-
-            <Tooltip
-              title={isCanGoNext() ? "" : "Najpierw wybierz wszystkie kolory."}
-              arrow
-              placement="top"
+            <Button
+              variant="outlined"
+              endIcon={<ArrowForwardIcon />}
+              disabled={!isCanGoNext()}
             >
-              <span>
-                <Button
-                  variant="outlined"
-                  endIcon={<ArrowForwardIcon />}
-                  disabled={!isCanGoNext()}
-                >
-                  Przejdź dalej
-                </Button>
-              </span>
-            </Tooltip>
+              Przejdź dalej
+            </Button>
           </Grid>
         </Grid>
       </Container>

@@ -15,6 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { UserContext } from "../contexts/UserContext";
 import PaletteIcon from "@mui/icons-material/Palette";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import logoImgUrl from "../assets/logo.png";
 
 const Menu = () => {
   const [open, setOpen] = React.useState(false);
@@ -61,7 +62,7 @@ const Menu = () => {
             }}
           >
             <Link to="/" className="menu-logo-brand">
-              <img src="assets/logo.png" alt="logo" className="menu-logo" />
+              <img src={logoImgUrl} alt="logo" className="menu-logo" />
               <div className="menu-brand-name">
                 <Typography className="menu-brand-name-text">Paleta</Typography>
                 <Typography className="menu-brand-name-text">
@@ -188,6 +189,7 @@ const Menu = () => {
                       component={Link}
                       to={"/login"}
                       sx={{ py: "6px", px: "12px" }}
+                      onClick={toggleDrawer(false)}
                     >
                       <Typography variant="body2" color="text.primary">
                         Zaloguj się
@@ -197,6 +199,7 @@ const Menu = () => {
                       component={Link}
                       to={"/register"}
                       sx={{ py: "6px", px: "12px" }}
+                      onClick={toggleDrawer(false)}
                     >
                       <Typography variant="body2" color="text.primary">
                         Zarejestruj się

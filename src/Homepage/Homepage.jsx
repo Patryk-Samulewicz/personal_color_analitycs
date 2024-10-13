@@ -5,6 +5,7 @@ import FaceRetouchingNaturalIcon from "@mui/icons-material/FaceRetouchingNatural
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { Animated } from "../utilities/Animated";
 import { Link } from "react-router-dom";
+import landingImgUrl from "../assets/landing_foto.jpg";
 
 const Homepage = () => {
   return (
@@ -170,8 +171,8 @@ const Homepage = () => {
                   height: "100%",
                   objectFit: "cover",
                 }}
-                src="assets/landing_foto.jpg"
-                alt=""
+                src={landingImgUrl}
+                alt="AI color pallete image"
               />
             </Grid>
           </Grid>

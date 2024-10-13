@@ -1,5 +1,5 @@
 .color-pickers {
-    padding: 1rem;
+    padding-bottom: 1rem;
     margin-bottom: 1rem;
     cursor: pointer;
     width: 10rem;
@@ -16,7 +16,7 @@
     text-align: center;
     font-size: 0.9rem;
     font-weight: 400;
-    padding: 1rem;
+    padding: 0;
 }
 
 .color-pickers:hover {
