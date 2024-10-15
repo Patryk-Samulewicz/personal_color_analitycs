@@ -28,30 +28,28 @@ const Generator = () => {
   }, [navigate, setAlert, user.isLoggedIn]);
 
   return (
-    <Animated>
-      <Box>
-        <Stepper
-          activeStep={step}
-          alternativeLabel
-          sx={{
-            paddingTop: "2rem",
-          }}
-        >
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
+    <Box>
+      <Stepper
+        activeStep={step}
+        alternativeLabel
+        sx={{
+          paddingTop: "2rem",
+        }}
+      >
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
 
-        {step === 0 && (
-          <StepOne setStep={setStep} file={file} setFile={setFile} />
-        )}
-        {step === 1 && (
-          <StepTwo setStep={setStep} file={file} setFile={setFile} />
-        )}
-      </Box>
-    </Animated>
+      {step === 0 && (
+        <StepOne setStep={setStep} file={file} setFile={setFile} />
+      )}
+      {step === 1 && (
+        <StepTwo setStep={setStep} file={file} setFile={setFile} />
+      )}
+    </Box>
   );
 };
 

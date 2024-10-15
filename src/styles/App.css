@@ -2,7 +2,8 @@
     padding-bottom: 1rem;
     margin-bottom: 1rem;
     cursor: pointer;
-    width: 10rem;
+    width: 100%;
+    min-width: 10rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -21,6 +22,28 @@
 
 .color-pickers:hover {
     box-shadow: 0 3px 11px 2px rgb(25, 118, 210);
+}
+
+@keyframes boxShadowAnimation {
+    0% {
+        box-shadow: 0 0 10px 2px rgba(25, 118, 210, 1);
+    }
+    25% {
+        box-shadow: 10px 0 10px 2px rgba(25, 118, 210, 1);
+    }
+    50% {
+        box-shadow: 10px 10px 10px 2px rgba(25, 118, 210, 1);
+    }
+    75% {
+        box-shadow: 0 10px 10px 2px rgba(25, 118, 210, 1);
+    }
+    100% {
+        box-shadow: 0 0 10px 2px rgba(25, 118, 210, 1);
+    }
+}
+
+.color-pickers.active {
+    animation: boxShadowAnimation 2s infinite linear;
 }
 
 .menu-logo {
@@ -57,4 +80,14 @@
     text-decoration: none;
     margin-left: 1rem;
     margin-right: 1rem;
+}
+
+.react-eyedrop-button {
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+}
+
+.controls {
+    width: auto;
 }
